@@ -15,8 +15,9 @@ namespace PART2PROG
             builder.Services.AddDbContext<ApplicationDBContext>(options =>
            options.UseSqlServer(builder.Configuration.GetConnectionString("Prog6212DEV")));
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDBContext>();
-
+            builder.Services.AddDefaultIdentity<IdentityUser>().AddDefaultTokenProviders()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDBContext>();
 
             var app = builder.Build();
 
@@ -32,6 +33,7 @@ namespace PART2PROG
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.MapRazorPages();
 
             app.UseAuthorization();
 
