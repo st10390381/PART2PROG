@@ -1,0 +1,34 @@
+﻿@model ClaimViewModel
+
+@* <form asp-action="Edit"> *@
+    <form asp-action="Edit" enctype="multipart/form-data">
+    <!-- Hidden field for ClaimId -->
+
+   @*  @Html.HiddenFor(model => model.ClaimId) *@
+
+    <div class="form-group">
+        <label asp-for="HoursWorked" class="control-label"></label>
+        <input asp-for="HoursWorked" class="form-control" />
+        <span asp-validation-for="HoursWorked" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="HourlyRate" class="control-label"></label>
+        <input asp-for="HourlyRate" class="form-control" />
+        <span asp-validation-for="HourlyRate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Notes" class="control-label"></label>
+        <textarea asp-for="Notes" class="form-control"></textarea>
+        <span asp-validation-for="Notes" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SupportingDocuments" class="control-label"></label>
+        <input asp-for="SupportingDocuments" class="form-control" type="file" />
+        <span asp-validation-for="SupportingDocuments" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

@@ -1,0 +1,207 @@
+﻿@model IEnumerable<PART2PROG.Models.Claim>
+
+
+@{
+    ViewBag.Title = "Claim Status";
+
+    // Helper methods to determine CSS classes based on status
+    string GetStatusClass(string status)
+    {
+        return status switch
+        {
+            "Approved by Manager" => "approved",
+            "Rejected by Coordinator" => "rejected",
+            "Rejected by Manager" => "rejected",
+            "Pending" => "pending",
+            _ => "unknown" // Default class for any unexpected status
+        };
+    }
+
+    string GetRowClass(string status)
+    {
+        return status switch
+        {
+            "Approved by Manager" => "text-success",
+            "Rejected by Coordinator" => "text-danger",
+            "Rejected by Manager" => "text-danger",
+            "Pending" => "text-warning",
+            _ => "text-muted" // Default text class
+        };
+    }
+}
+
+
+@* <div class="container-claims">
+    <h2 style="color: #03041c;">Track Your Claim Status</h2>
+    <!-- Status Summary Section -->
+    <div class="status-summary">
+        <div class="status-item approved">
+            Approved Claims: <span id="approved-count">@Model.Count(c => c.Status == "Approved by Manager")</span>
+        </div>
+        <div class="status-item rejected">
+            Rejected Claims: <span id="rejected-count">@Model.Count(c => c.Status == "Rejected by Coordinator" || c.Status == "Rejected by Manager")</span>
+        </div>
+        <div class="status-item pending">
+            Pending Claims: <span id="pending-count">@Model.Count(c => c.Status == "Pending")</span>
+        </div>
+    </div>
+ *@
+    <!-- Filter Section -->
+   @*  <div class="filter-section">
+        <label for="status-filter">Filter by Status:</label>
+        <select id="status-filter" class="status-filter" onchange="filterClaims()">
+            <option value="All">All</option>
+            <option value="Approved">Approved</option>
+            <option value="Rejected">Rejected</option>
+            <option value="Pending">Pending</option>
+        </select>
+    </div> *@
+
+    <!-- Claims Table -->
+    @* <table class="table">
+        <thead>
+            <tr>
+                <th>Claim ID</th>
+                <th>Submission Date</th>
+                <th>Status</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody id="claims-table-body">
+            @foreach (var claim in Model)
+            {
+                <tr class="@GetStatusClass(claim.Status)" data-status="@claim.Status">
+                    <td>@claim.ClaimId</td>
+                    <td>@claim.DateSubmitted.ToString("yyyy/MM/dd")</td>
+                    <td class="@GetRowClass(claim.Status)">@claim.Status</td>
+                    <td>@claim.Notes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a href="/Lecturer/Dashboard" class="btn-submit" style="text-decoration:none;"><i class="fa-solid fa-house"></i> Back to Dashboard</a>
+</div> *@
+<h2 class="text-center">Claim Status</h2>
+
+<!-- Claims Table -->
+<div class="table-container">
+    <table class="table table-hover table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Claim ID</th>
+                <th>Submission Date</th>
+                <th>Status</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody id="claims-table-body">
+            @foreach (var claim in Model)
+            {
+                <tr class="@GetStatusClass(claim.Status)" data-status="@claim.Status">
+                    <td>@claim.ClaimId</td>
+                    <td>@claim.DateSubmitted.ToString("yyyy/MM/dd")</td>
+                    <td class="@GetRowClass(claim.Status)">@claim.Status</td>
+                    <td>@claim.Notes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<a href="/Lecturer/Dashboard" class="btn-submit btn-back"><i class="fa-solid fa-house"></i> Back to Dashboard</a>
+
+<!-- Styles Section -->
+<style>
+    h2 {
+        color: #03041c;
+        margin-bottom: 30px;
+    }
+
+    .table-container {
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        color: #212529;
+        border-collapse: collapse;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f2f2f2;
+    }
+
+    .thead-dark {
+        background-color: #343a40;
+        color: white;
+    }
+
+    .approved {
+        background-color: #dff0d8; /* Light green */
+    }
+
+    .rejected {
+        background-color: #f8d7da; /* Light red */
+    }
+
+    .pending {
+        background-color: #fff3cd; /* Light yellow */
+    }
+
+    .unknown {
+        background-color: #e2e3e5; /* Light grey */
+    }
+
+    .btn-submit {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 20px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+        border: none;
+    }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+
+    .btn-back {
+        text-decoration: none;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-success {
+        color: #28a745 !important; /* Green */
+    }
+
+    .text-danger {
+        color: #dc3545 !important; /* Red */
+    }
+
+    .text-warning {
+        color: #ffc107 !important; /* Yellow */
+    }
+
+    .text-muted {
+        color: #6c757d !important; /* Grey */
+    }
+</style>

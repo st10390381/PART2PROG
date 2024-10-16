@@ -1,8 +1,158 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewBag.Title = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Background Image and Styling for Hero Section -->
+<style>
+    .hero-section {
+        background-image: url('/images/ClaimIMG.webp'); /* Use your image as the background */
+        background-size: cover;
+        background-position: center;
+        height: 90vh; /* Full screen height */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+    }
+
+    .hero-text {
+        background-color: rgba(0, 0, 0, 0.5); /* Transparent overlay */
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+    .container-info {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .info-section {
+        margin-top: 50px;
+    }
+
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        padding: 20px;
+        margin: 15px;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+</style>
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="hero-text">
+        <h1>Welcome to the Claim Management System</h1>
+        <p>Track your claims easily and efficiently.</p>
+        <a href="/Claim/Create" class="btn btn-primary btn-lg">Submit a New Claim</a>
+    </div>
 </div>
+
+<!-- Information Section -->
+<div class="container-info">
+    <h2>How It Works</h2>
+    <p>Our system is designed to streamline the claim submission and approval process. You can track, manage, and review claims at any time.</p>
+
+    <div class="row info-section">
+        <div class="col-md-4">
+            <div class="card">
+                <h3>Submit Claims</h3>
+                <p>Submit your claims quickly and easily using our simple form. Upload necessary documents for review.</p>
+                <a href="/Claim/Create" class="btn btn-primary">Submit Now</a>
+            </div>
+        </div> 
+        
+        <div class="col-md-4">
+            <div class="card">
+                <h3>About Us</h3>
+                <p>We are committed to providing a seamless claim management experience. Our platform simplifies the claim process for contractors and coordinators, ensuring transparency and efficiency every step of the way.</p>
+                <a href="/Home/AboutUs" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <h3>Track Progress</h3>
+                <p>Monitor the status of your submitted claims. Stay updated with notifications on approvals or rejections.</p>
+                <a href="/Claim/TrackClaims" class="btn btn-primary">Track Status</a>
+            </div>
+        </div>
+
+        <div class="container-info" style="margin-top: 50px;">
+            <h2>Why Choose Us?</h2>
+            <p>Our Claim Management System is designed to provide you with the best tools to manage your claims efficiently, whether you're an independent contractor or a coordinator. Here’s what makes our system stand out:</p>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="info-section">
+                        <h3>Simple and Intuitive</h3>
+                        <p>We've created a platform that is user-friendly, ensuring that submitting and managing claims is a seamless experience for all users. Every feature is easy to navigate, so you can focus on what matters most.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="info-section">
+                        <h3>Real-time Tracking</h3>
+                        <p>With our system, once a claim is submitted, you can monitor its progress in real-time—from submission to final approval. Say goodbye to uncertainty as you stay updated on the status of your claims throughout the entire process.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="info-section">
+                        <h3>Secure Document Management</h3>
+                        <p>We prioritize the security of your documents. All uploaded files are securely stored and managed, giving you the confidence that your important data is protected and easily accessible whenever you need it.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-4">
+                    <div class="info-section">
+                        <h3>Notifications and Updates</h3>
+                        <p>Our system keeps you informed with instant notifications whenever the status of a claim changes. Whether it’s an approval or a request for more information, you’ll be notified promptly, ensuring that you're always in the loop.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="info-section">
+                        <h3>Transparent Approval Process</h3>
+                        <p>We promote transparency throughout the claim review process. You can see when claims are reviewed, approved, or rejected, along with the reasons. This clarity ensures better communication between claimants and coordinators, improving trust and efficiency.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-section">
+                        <h3>Customer Support</h3>
+                        <p>We offer dedicated customer support to assist you with any questions or concerns you may have. Our team is here to help you navigate the system and resolve any issues quickly and efficiently.</p>
+                    </div>
+                </div>
+                <div>
+                </div>
+                <div>
+                </div>
+            </div>
+
+            <p>Whether you’re submitting a claim or reviewing one, our Claim Management System simplifies the process for everyone involved, making it a hassle-free experience.</p>
+        </div>
+</div>
+</div>
+
+<!-- Footer Section -->
+<footer class="text-center" style="margin-top: 50px;">
+    <p>&copy; 2024 Claim Management System. All rights reserved.</p>
+</footer>

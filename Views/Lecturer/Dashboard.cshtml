@@ -1,0 +1,165 @@
+﻿@model IEnumerable<PART2PROG.Models.Claim>
+
+<div class="container-dashboard">
+    <h2>Lecturer Information</h2>
+
+    @* <div class="filter-section">
+        <form method="get" class="filter-form">
+            <label for="start-date">Start Date:</label>
+            <input type="date" id="start-date" name="startDate" value="@Context.Request.Query["startDate"]" class="form-control" />
+            <label for="end-date">End Date:</label>
+            <input type="date" id="end-date" name="endDate" value="@Context.Request.Query["endDate"]" class="form-control" />
+            <button type="submit" class="btn-filter">Filter</button>
+        </form>
+    </div> *@
+
+    <table class="table table-hover">
+        <thead class="table-header">
+            <tr>
+                <th>Claim ID</th>
+                <th>Date Submitted</th>
+                <th>Hours Worked</th>
+                <th>Hourly Rate</th>
+                <th>Total Amount</th>
+                <th>Supporting Documents</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model)
+            {
+                <tr>
+                    <td>@claim.ClaimId</td>
+                    <td>@claim.DateSubmitted.ToShortDateString()</td>
+                    <td>@claim.HoursWorked</td>
+                    <td>R @claim.HourlyRate</td>
+                    <td>R @claim.TotalAmount</td>
+                    <td>
+                        @if (claim.Doc != null && claim.Doc.Any())
+                        {
+                            <ul style="list-style-type: none;">
+                                @foreach (var doc in claim.Doc)
+                                {
+                                    <li>
+                                        <i class="fa-solid fa-download"></i>
+                                        <a href="@Url.Content("~/uploads/" + doc.DocumentName)" target="_blank" style="text-decoration: none; color: #212529;">View Document</a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <span>No Documents</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="action-section">
+        <a href="/Claim/Create" class="btn-submit"><i class="fa-solid fa-upload"></i> Submit New Claim</a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+    /* Background theme for the entire view */
+    body {
+        background-color: #e6f2f5; /* Soft blue-gray background */
+    }
+
+    .container-dashboard {
+        margin: 20px auto;
+        padding: 25px;
+        background-color: #ffffff; /* White background for the main content */
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 1200px;
+    }
+
+    h2 {
+        color: #03041c;
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        border-collapse: collapse;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1; /* Light hover effect */
+    }
+
+    .table-header {
+        background-color: #343a40; /* Dark header background */
+        color: white;
+    }
+
+    .table th, .table td {
+        padding: 15px;
+        text-align: left;
+        vertical-align: middle;
+        border-bottom: 1px solid #ddd;
+    }
+
+        .table td a {
+            color: #212529;
+            text-decoration: none;
+        }
+
+    .document-list {
+        padding-left: 0;
+        list-style-type: none;
+    }
+
+    /* Custom color for the "View Document" link */
+    .document-link {
+        color: #ff5722; /* Distinct orange color for document links */
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .document-link:hover {
+            color: #e64a19; /* Darker orange on hover */
+            text-decoration: underline;
+        }
+
+    .no-documents {
+        color: #6c757d;
+        font-style: italic;
+    }
+
+    .action-section {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .btn-submit {
+        background-color: #007bff;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-submit i {
+            margin-right: 8px;
+        }
+</style>
