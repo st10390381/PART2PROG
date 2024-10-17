@@ -1,5 +1,4 @@
-﻿@model IEnumerable<PART2PROG.Models.Claim>
-
+﻿ @model IEnumerable<PART2PROG.Models.Claim>
 
 @{
     ViewBag.Title = "Claim Status";
@@ -30,7 +29,241 @@
     }
 }
 
+<h2 class="text-center">Claim Status</h2>
 
+<!-- Pending Claims Table -->
+<div class="table-container">
+    <h3 class="text-warning">Pending Claims</h3>
+    <table class="table table-hover table-striped table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th>Claim ID</th>
+                <th>Submission Date</th>
+                <th>Status</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model.Where(c => c.Status == "Pending"))
+            {
+                <tr class="pending">
+                    <td>@claim.ClaimId</td>
+                    <td>@claim.DateSubmitted.ToString("yyyy/MM/dd")</td>
+                    <td class="text-warning">@claim.Status</td>
+                    <td>@claim.Notes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Approved Claims Table -->
+<div class="table-container">
+    <h3 class="text-success">Approved Claims</h3>
+    <table class="table table-hover table-striped table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th>Claim ID</th>
+                <th>Submission Date</th>
+                <th>Status</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model.Where(c => c.Status == "Approved by Manager"))
+            {
+                <tr class="approved">
+                    <td>@claim.ClaimId</td>
+                    <td>@claim.DateSubmitted.ToString("yyyy/MM/dd")</td>
+                    <td class="text-success">@claim.Status</td>
+                    <td>@claim.Notes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Rejected Claims Table -->
+<div class="table-container">
+    <h3 class="text-danger">Rejected Claims</h3>
+    <table class="table table-hover table-striped table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th>Claim ID</th>
+                <th>Submission Date</th>
+                <th>Status</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model.Where(c => c.Status == "Rejected by Coordinator" || c.Status == "Rejected by Manager"))
+            {
+                <tr class="rejected">
+                    <td>@claim.ClaimId</td>
+                    <td>@claim.DateSubmitted.ToString("yyyy/MM/dd")</td>
+                    <td class="text-danger">@claim.Status</td>
+                    <td>@claim.Notes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<a href="/Lecturer/Dashboard" class="btn-submit btn-back"><i class="fa-solid fa-house"></i> Back to Dashboard</a>
+
+<!-- Styles Section -->
+<style>
+    h2, h3 {
+        color: #03041c;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+    }
+
+    .table-container {
+        margin: 10px auto;
+        padding: 10px;
+        width: 80%; /* Adjusted width for smaller tables */
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 0.5rem; /* Reduce margin below table */
+        color: #212529;
+        border-collapse: collapse;
+        font-size: 0.9rem; /* Smaller font for the table */
+    }
+
+        .table th, .table td {
+            padding: 8px; /* Reduce padding inside table cells */
+            vertical-align: middle;
+            border-top: 1px solid #dee2e6;
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f2f2f2;
+    }
+
+    .thead-dark {
+        background-color: #343a40;
+        color: white;
+    }
+
+    .approved {
+        background-color: #dff0d8; /* Light green */
+    }
+
+    .rejected {
+        background-color: #f8d7da; /* Light red */
+    }
+
+    .pending {
+        background-color: #fff3cd; /* Light yellow */
+    }
+
+    .btn-submit {
+        display: inline-block;
+        padding: 8px 16px; /* Smaller button padding */
+        margin-top: 10px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+        border: none;
+    }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+
+    .btn-back {
+        text-decoration: none;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-success {
+        color: #28a745 !important; /* Green */
+    }
+
+    .text-danger {
+        color: #dc3545 !important; /* Red */
+    }
+
+    .text-warning {
+        color: #ffc107 !important; /* Yellow */
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+@* @model IEnumerable<PART2PROG.Models.Claim>
+
+
+@{
+    ViewBag.Title = "Claim Status";
+
+    // Helper methods to determine CSS classes based on status
+    string GetStatusClass(string status)
+    {
+        return status switch
+        {
+            "Approved by Manager" => "approved",
+            "Rejected by Coordinator" => "rejected",
+            "Rejected by Manager" => "rejected",
+            "Pending" => "pending",
+            _ => "unknown" // Default class for any unexpected status
+        };
+    }
+
+    string GetRowClass(string status)
+    {
+        return status switch
+        {
+            "Approved by Manager" => "text-success",
+            "Rejected by Coordinator" => "text-danger",
+            "Rejected by Manager" => "text-danger",
+            "Pending" => "text-warning",
+            _ => "text-muted" // Default text class
+        };
+    }
+}
+ *@
+ 
 @* <div class="container-claims">
     <h2 style="color: #03041c;">Track Your Claim Status</h2>
     <!-- Status Summary Section -->
@@ -82,7 +315,7 @@
 
     <a href="/Lecturer/Dashboard" class="btn-submit" style="text-decoration:none;"><i class="fa-solid fa-house"></i> Back to Dashboard</a>
 </div> *@
-<h2 class="text-center">Claim Status</h2>
+@*  <h2 class="text-center">Claim Status</h2>
 
 <!-- Claims Table -->
 <div class="table-container">
@@ -109,10 +342,10 @@
     </table>
 </div>
 
-<a href="/Lecturer/Dashboard" class="btn-submit btn-back"><i class="fa-solid fa-house"></i> Back to Dashboard</a>
-
+<a href="/Lecturer/Dashboard" class="btn-submit btn-back"><i class="fa-solid fa-house"></i> Back to Dashboard</a> *@
+ 
 <!-- Styles Section -->
-<style>
+@* <style>
     h2 {
         color: #03041c;
         margin-bottom: 30px;
@@ -205,3 +438,4 @@
         color: #6c757d !important; /* Grey */
     }
 </style>
+*@

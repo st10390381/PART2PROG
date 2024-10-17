@@ -3,13 +3,13 @@
 @{
     ViewData["Title"] = "Register";
 }
-
+<div class="container-info" style="background-color: rgba(0, 0, 0, 0.7); padding: 20px; border-radius: 10px; margin-top: 50px;">
 <div class="register-container">
     <div class="register-box">
         <section class="register-section">
             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                <h1>Register</h1>
-                <h2>Enter your details to create a New Account</h2>
+                    <h1 style="color: white;">Register</h1>
+                    <h2 style="color: white;">Enter your details to create a New Account</h2>
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
@@ -49,11 +49,12 @@
                     </select>
                     <span asp-validation-for="Input.Role" class="text-danger"></span>
                 </div>
-
-                <button id="registerSubmit" type="submit" class="btn btn-register">Register</button>
+                    <button style="color: white; background-color: #007bff;" id="registerSubmit" type="submit" class="btn btn-register">Register</button>
+                   @*  <button style="color: white;" id="registerSubmit" type="submit" class="btn btn-register">Register</button> *@
             </form>
         </section>
     </div>
+</div>
 </div>
 
 @section Scripts {

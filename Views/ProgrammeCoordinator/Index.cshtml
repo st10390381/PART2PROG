@@ -3,6 +3,200 @@
     ViewBag.Title = "Pending Claims for Programme Coordinator";
 }
 
+<style>
+    /* Background theme for the entire view */
+    body {
+        background-color: #e6f2f5; /* Soft blue-gray background */
+    }
+
+    .container-dashboard {
+        margin: 20px auto;
+        padding: 25px;
+        background-color: #ffffff; /* White background for the main content */
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 1200px;
+    }
+
+    h2 {
+        color: #03041c;
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        border-collapse: collapse;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1; /* Light hover effect */
+    }
+
+    .table-header {
+        background-color: #343a40; /* Dark header background */
+        color: white;
+    }
+
+    .table th, .table td {
+        padding: 15px;
+        text-align: left;
+        vertical-align: middle;
+        border-bottom: 1px solid #ddd;
+    }
+
+        .table td a {
+            color: #212529;
+            text-decoration: none;
+        }
+
+    .document-list {
+        padding-left: 0;
+        list-style-type: none;
+    }
+
+    /* Custom color for the "View Document" link */
+    .document-link {
+        color: #ff5722; /* Distinct orange color for document links */
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .document-link:hover {
+            color: #e64a19; /* Darker orange on hover */
+            text-decoration: underline;
+        }
+
+    .no-documents {
+        color: #6c757d;
+        font-style: italic;
+    }
+
+    .action-section {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    /* Approve button (Green) */
+    .btn-approve {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-approve:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+    /* Reject button (Red) */
+    .btn-reject {
+        background-color: #dc3545;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-reject:hover {
+            background-color: #c82333; /* Darker red on hover */
+        }
+</style>
+
+<body>
+    <div class="container-dashboard">
+        <h2>Pending Coordinator Review</h2>
+
+        <table class="table table-striped table-hover">
+            <thead class="table-header">
+                <tr>
+                    <th>Claim ID</th>
+                    <th>Submitted By</th>
+                    <th>Date Submitted</th>
+                    <th>Hours Worked</th>
+                    <th>Hourly Rate</th>
+                    <th>Total Amount</th>
+                    <th>Supporting Documents</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var claim in Model)
+                {
+                    <tr>
+                        <td>@claim.ClaimId</td>
+                        <td>@claim.ApplicationUser?.Email</td>
+                        <td>@claim.DateSubmitted.ToString("yyyy-MM-dd")</td>
+                        <td>@claim.HoursWorked</td>
+                        <td>R @claim.HourlyRate</td>
+                        <td>R @claim.TotalAmount</td>
+                        <td>
+                            @if (claim.Doc != null && claim.Doc.Any())
+                            {
+                                <ul class="document-list">
+                                    @foreach (var doc in claim.Doc)
+                                    {
+                                        <li>
+                                            <i class="fa-solid fa-download"></i>
+                                            <a href="@Url.Content("~/uploads/" + doc.DocumentName)" target="_blank" class="document-link">View Document</a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <span class="no-documents">No Documents</span>
+                            }
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <!-- Approve form -->
+                                <form asp-action="Approve" method="post">
+                                    <input type="hidden" name="claimId" value="@claim.ClaimId" />
+                                    <input type="submit" value="Approve" class="btn-approve" />
+                                </form>
+                                <br />
+
+                                <!-- Reject form -->
+                                <form asp-action="Reject" method="post" style="display:inline;">
+                                    <input type="hidden" name="claimId" value="@claim.ClaimId" />
+                                    <input type="submit" value="Reject" class="btn-reject" />
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @if (!Model.Any())
+        {
+            <p>No pending claims to review at this time.</p>
+        }
+    </div>
+</body>
+
+
+
+
+
+
+
+@* @model IEnumerable<PART2PROG.Models.Claim>
+@{
+    ViewBag.Title = "Pending Claims for Programme Coordinator";
+}
+
 <body>
     <div class="container-claims">
         <h2>Pending Claims for Programme Coordinator</h2>
@@ -74,3 +268,4 @@
         }
     </div>
     </body>
+ *@

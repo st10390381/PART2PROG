@@ -21,18 +21,18 @@ body {
   margin-bottom: 60px;
 }
 
-/*body {
-    background-image: url('/images/Wall.webp');
+body {
+    background-image: url('/images/PAPER.jpg');
     background-size: cover; 
     background-repeat: no-repeat;
     background-position: center; 
-}*/
+}
 
 /* PART2PROG.styles.css */
 
 /* Dark grey navbar */
-.navbar {
-    background-color: #343a40; /* Dark grey */
+*.navbar {
+    background-color: #343a40;  /*Dark grey */
     border-radius: 0; /* Make it rectangle */
     padding: 10px;
 }
@@ -53,7 +53,7 @@ body {
 
     .navbar-nav .nav-link:hover {
         background-color: #495057; /* Darker grey on hover */
-        border-radius: 5px; /* Optional: gives a slight rounded edge when hovered */
+        border-radius: 5px;*/ /* Optional: gives a slight rounded edge when hovered */
     }
 
 /* Navbar-toggler (hamburger menu button) */
@@ -80,13 +80,15 @@ body {
 
 /* Footer Styling */
 .footer {
+    margin-top: 50px;
+    padding: 20px 0;
     background-color: #343a40;
-    color: #ffffff;
-    padding: 10px 0;
+    color: white;
 }
 
 .navbar-nav.ms-auto .nav-link, /* Target links like Logout */
-.navbar-nav.ms-auto .navbar-text { /* Target text like Hello, email */
+.navbar-nav.ms-auto .navbar-text 
+{ /* Target text like Hello, email */
     color: #ffffff !important; /* White text with higher specificity */
 }
 

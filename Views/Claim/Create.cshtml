@@ -3,6 +3,94 @@
     ViewData["Title"] = "Submit Claim";
 }
 
+<style>
+    .container-claims {
+        color: white; /* Set all text color to white */
+        background-color: #343a40; /* Optional: Set a background color for contrast */
+        padding: 20px; /* Optional: Add some padding */
+        border-radius: 10px; /* Optional: Add rounded corners */
+    }
+
+    /* Style for form elements */
+    .form-group label {
+        color: white; /* Ensure labels are white */
+    }
+
+    .form-control {
+        background-color: #ffffff; /* Optional: Set background color of input fields to white */
+        color: black; /* Text color for input fields */
+    }
+
+    .btn-claims {
+        color: white; /* Set button text color to white */
+        background-color: #007bff; /* Customize button background color */
+    }
+
+        .btn-claims:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+</style>
+<br>
+<br>
+<br>
+<div class="container-claims">
+    <h2>Submit Your Claim</h2>
+
+    <form asp-action="Create" enctype="multipart/form-data" method="post">
+        <div class="form-group">
+            <label asp-for="HoursWorked"></label>
+            <input asp-for="HoursWorked" class="form-control" required />
+            <span asp-validation-for="HoursWorked" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="HourlyRate"></label>
+            <input asp-for="HourlyRate" class="form-control" required />
+            <span asp-validation-for="HourlyRate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Notes"></label>
+            <textarea asp-for="Notes" class="form-control" rows="4" placeholder="Add any additional notes..."></textarea>
+            <span asp-validation-for="Notes" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="SupportingDocuments" style="@(ViewBag.InvalidFile != null && (bool)ViewBag.InvalidFile ? "color: red;" : "color: white;")">Supporting Documents (PDF only, max 15MB)</label>
+            <input type="file" name="SupportingDocuments" class="form-control" multiple required />
+            <span asp-validation-for="SupportingDocuments" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn-claims btn-primary"><i class="fa-solid fa-upload"></i> Submit Claim</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* @model PART2PROG.Models.ClaimViewModel
+@{
+    ViewData["Title"] = "Submit Claim";
+}
+
 <div class="container-claims">
     <h2>Submit Your Claim</h2>
 
@@ -37,4 +125,4 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-}
+} *@

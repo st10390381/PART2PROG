@@ -7,7 +7,7 @@ using PART2PROG.Models;
 
 namespace PART2PROG.Controllers
 {
-    [Authorize]
+    [Authorize (Roles = "Lecturer")]
     public class ClaimController : Controller
     {
         private readonly ApplicationDBContext _context; //interact with the database.
