@@ -139,55 +139,6 @@ namespace PART2PROG.Controllers
 
 
 
-        // GET: Claims/Edit/5
-        //public async Task<IActionResult> Edit(int id)
-        //{
-        //    var claim = await _context.Claims.FindAsync(id);
-        //    if (claim == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    // Map Claim to ClaimViewModel
-        //    var model = new ClaimViewModel
-        //    {
-        //        ClaimId = claim.ClaimId,
-        //        HoursWorked = claim.HoursWorked,
-        //        HourlyRate = claim.HourlyRate,
-        //        Notes = claim.Notes,
-        //        // Add other necessary fields from Claim to ClaimViewModel
-        //    };
-
-        //    return View(model);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, ClaimViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-        //    }
-
-        //    var claim = await _context.Claims.FindAsync(id);
-        //    if (claim == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    // Update claim with model values
-        //    claim.HoursWorked = model.HoursWorked;
-        //    claim.HourlyRate = model.HourlyRate;
-        //    claim.Notes = model.Notes;
-        //    // Update other fields as necessary
-
-        //    await _context.SaveChangesAsync();
-
-        //    TempData["SuccessMessage"] = "Claim updated successfully!";
-        //    return RedirectToAction(nameof(TrackClaims));
-        //}
-
 
     }
 }

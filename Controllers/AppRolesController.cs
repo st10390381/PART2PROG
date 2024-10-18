@@ -6,7 +6,7 @@ namespace PART2PROG.Controllers
     public class AppRolesController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
-        //constructort
+        //constructor
         public AppRolesController(RoleManager<IdentityRole> roleManager)
         {
             _roleManager = roleManager;
@@ -25,7 +25,6 @@ namespace PART2PROG.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(IdentityRole model)
         {
-            //prohibt duplicate role
             if (!_roleManager.RoleExistsAsync(model.Name).GetAwaiter().GetResult())
             {
                 _roleManager.CreateAsync(new IdentityRole(model.Name)).GetAwaiter().GetResult();

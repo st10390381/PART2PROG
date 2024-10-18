@@ -39,7 +39,6 @@ namespace PART2PROG.Models
         public virtual ICollection<SupportingDocument> Doc { get; set; }
 
 
-        // Custom validation for DateSubmitted
         public static ValidationResult ValidateSubmissionDate(DateTime dateSubmitted, ValidationContext context)
         {
             var currentDate = DateTime.Now;
