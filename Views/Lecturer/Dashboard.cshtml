@@ -3,16 +3,6 @@
 <div class="container-dashboard">
     <h2>Lecturer Information</h2>
 
-    @* <div class="filter-section">
-        <form method="get" class="filter-form">
-            <label for="start-date">Start Date:</label>
-            <input type="date" id="start-date" name="startDate" value="@Context.Request.Query["startDate"]" class="form-control" />
-            <label for="end-date">End Date:</label>
-            <input type="date" id="end-date" name="endDate" value="@Context.Request.Query["endDate"]" class="form-control" />
-            <button type="submit" class="btn-filter">Filter</button>
-        </form>
-    </div> *@
-
     <table class="table table-hover">
         <thead class="table-header">
             <tr>
@@ -41,7 +31,7 @@
                                 {
                                     <li>
                                         <i class="fa-solid fa-download"></i>
-                                        <a href="@Url.Content("~/uploads/" + doc.DocumentName)" target="_blank" style="text-decoration: none; color: #212529;">View Document</a>
+                                        <a href="@Url.Content("~/uploads/" + doc.DocumentName)" target="_blank" class="document-link">View Document</a>
                                     </li>
                                 }
                             </ul>
@@ -66,7 +56,6 @@
 }
 
 <style>
-    /* Background theme for the entire view */
     body {
         background-color: #e6f2f5; /* Soft blue-gray background */
     }
@@ -120,7 +109,6 @@
         list-style-type: none;
     }
 
-    /* Custom color for the "View Document" link */
     .document-link {
         color: #ff5722; /* Distinct orange color for document links */
         text-decoration: none;
@@ -130,6 +118,9 @@
         .document-link:hover {
             color: #e64a19; /* Darker orange on hover */
             text-decoration: underline;
+        }
+
+    ext-decoration: underline;
         }
 
     .no-documents {
@@ -163,3 +154,19 @@
             margin-right: 8px;
         }
 </style>
+
+
+@* Reference List:
+
+https://chatgpt.com/c/67116b65-8d9c-800d-8859-0996c651971b
+Chatgpt - css theme
+Accessed 16 October 2024
+
+https://www.w3schools.com/css/
+w3school
+Accessed 15 October 2024
+
+https://www.w3schools.com/html/
+w3schools
+Accessed 15 October 2024
+*@

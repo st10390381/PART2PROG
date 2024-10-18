@@ -113,7 +113,31 @@ namespace PART2PROG.Controllers
         }
 
 
-        
+
+
+
+        //https://learn.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-8.0
+        //-Microsoft
+        //-Accessed 17 October 2024
+
+        //Reference list:
+        //https://www.w3schools.com/html/
+        //-w3schools
+        //- Accessed 15 October 2024
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // GET: Claims/Edit/5
         //public async Task<IActionResult> Edit(int id)
@@ -164,7 +188,7 @@ namespace PART2PROG.Controllers
         //    return RedirectToAction(nameof(TrackClaims));
         //}
 
-        
+
     }
 }
 

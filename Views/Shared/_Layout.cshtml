@@ -36,13 +36,13 @@
                         @if (User.IsInRole("Lecturer"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Lecturer" asp-action="Dashboard">My Dashboard</a>
+                                <a class="nav-link" asp-area="" asp-controller="Lecturer" asp-action="Dashboard">Your Dashboard</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Claim" asp-action="Create">Submit a Claim</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Claim" asp-action="TrackClaims">Track Claims</a>
+                                <a class="nav-link" asp-area="" asp-controller="Claim" asp-action="TrackClaims">Claims Progress</a>
                             </li>
                         }
 
@@ -116,6 +116,30 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+@* Reference list:
+https://www.w3schools.com/css/ 
+- w3schools
+-Accessed 15 October 2024
+
+https://www.w3schools.com/howto/howto_css_login_form_navbar.asp 
+- w3schools
+-Accessed 16 October 2024
+*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @* @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager

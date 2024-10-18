@@ -5,7 +5,6 @@
 }
 
 <style>
-    /* Background theme for the entire view */
     body {
         background-color: #e6f2f5; /* Soft blue-gray background */
     }
@@ -166,6 +165,7 @@
                                     <input type="hidden" name="claimId" value="@claim.ClaimId" />
                                     <input type="submit" value="Approve" class="btn-approve" />
                                 </form>
+                                <br />
 
                                 <!-- Reject form -->
                                 <form asp-action="Reject" method="post" style="display:inline;">
@@ -185,6 +185,21 @@
         }
     </div>
 </body>
+
+@* Reference List:
+
+https://chatgpt.com/c/67116b65-8d9c-800d-8859-0996c651971b
+Chatgpt - css theme
+Accessed 16 October 2024 
+
+https://www.w3schools.com/css/
+w3school 
+Accessed 15 October 2024
+
+https://www.w3schools.com/html/
+w3schools
+Accessed 15 October 2024
+*@
 
 
 
