@@ -1,0 +1,68 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<PART2PROG.Models.HRViewModel>
+@{
+    ViewData["Title"] = "Manage Claims";
+    var southAfricaCulture = new System.Globalization.CultureInfo("en-ZA");
+}
+
+<h2>Manage Claims</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Claim ID</th>
+            <th>Lecturer</th>
+            <th>Hours Worked</th>
+            <th>Hourly Rate (R)</th>
+            <th>Total Amount (R)</th>
+            <th>Date Submitted</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim.ClaimId</td>
+                <td>@claim.LecturerName</td>
+                <td>@claim.HoursWorked</td>
+                <td>@claim.HourlyRate.ToString("C", southAfricaCulture)</td>
+                <td>@claim.TotalAmount.ToString("C", southAfricaCulture)</td>
+                <td>@claim.DateSubmitted.ToShortDateString()</td>
+                <td>@claim.Status</td>
+                <td>
+                    <a asp-action="GenerateIndividualReport" asp-route-claimId="@claim.ClaimId" class="btn btn-info btn-sm">
+                        Download Report
+                    </a>
+                    @if (claim.Status == "Approved by HR" || claim.Status == "Rejected by HR")
+                    {
+                        <span class="badge bg-secondary">Finalized</span>
+                    }
+                    else
+                    {
+                        <form asp-action="ApproveRejectClaim" method="post" class="d-inline">
+                            <input type="hidden" name="claimId" value="@claim.ClaimId" />
+                            <button type="submit" name="isApproved" value="true" class="btn btn-success btn-sm">Approve</button>
+                            <button type="submit" name="isApproved" value="false" class="btn btn-danger btn-sm">Reject</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+}
