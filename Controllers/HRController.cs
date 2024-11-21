@@ -116,3 +116,11 @@ namespace PART2PROG.Controllers
         }
     }
 }
+//https://learn.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-8.0
+//-Microsoft
+//-Accessed 20 November 2024
+
+//Reference list:
+//https://www.w3schools.com/html/
+//-w3schools
+//- Accessed 20 November 2024
