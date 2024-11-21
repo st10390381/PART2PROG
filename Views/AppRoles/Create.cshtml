@@ -1,7 +1,82 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @model IdentityRole
 
-<div class="row">
+<br>
+<br>
+<br>
+<div class="container-claims">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form method="post">
+                <h2 class="text-center">Create Role</h2>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Name" class="form-label">Role Name</label>
+                    <input asp-for="Name" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-claims">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Container for the form */
+    .container-claims {
+        color: white; /* Set all text color to white */
+        background-color: #343a40; /* Set a background color for contrast */
+        padding: 30px; /* Add some padding around the form */
+        border-radius: 10px; /* Add rounded corners for the container */
+        max-width: 600px; /* Limit the width */
+        margin: 0 auto; /* Center the container */
+    }
+
+    /* Style for form elements */
+    .form-group label {
+        color: white; /* Ensure labels are white */
+        font-weight: bold; /* Make the labels bold */
+    }
+
+    .form-control {
+        background-color: #ffffff; /* Set background color of input fields to white */
+        color: black; /* Text color for input fields */
+        border-radius: 5px; /* Round the corners of the input fields */
+    }
+
+    .btn-claims {
+        color: white; /* Set button text color to white */
+        background-color: #007bff; /* Customize button background color */
+        border-radius: 5px; /* Round corners of the button */
+        padding: 10px 20px; /* Add padding to the button */
+        font-size: 16px; /* Adjust font size */
+    }
+
+        .btn-claims:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .mt-4 {
+        margin-top: 1.5rem;
+    }
+
+    /* Style for error messages */
+    .text-danger {
+        font-size: 0.9rem;
+        margin-top: 5px;
+    }
+</style>
+
+@* <div class="row">
     <div class="col-md-4">
         <form method="post">
             <h2>Create Role</h2>
@@ -15,4 +90,4 @@
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
-</div>
+</div> *@
