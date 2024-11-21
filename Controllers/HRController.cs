@@ -1,5 +1,6 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PART2PROG.Data;
@@ -8,6 +9,7 @@ using System.Globalization;
 
 namespace PART2PROG.Controllers
 {
+    [Authorize(Roles = "HR")]
     public class HRController : Controller
     {
         private readonly ApplicationDBContext _context;

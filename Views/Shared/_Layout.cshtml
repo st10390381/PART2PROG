@@ -62,6 +62,12 @@
                                 <a class="nav-link" asp-area="" asp-controller="AcademicManager" asp-action="Index">Manager</a>
                             </li>
                         }
+                        @if (User.IsInRole("HR"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="HR" asp-action="Index">HR</a>
+                            </li>
+                        }
                     </ul>
 
                    @*  <ul class="navbar-nav flex-grow-1">
