@@ -7,6 +7,198 @@
     var southAfricaCulture = new System.Globalization.CultureInfo("en-ZA");
 }
 
+<style>
+    body {
+        background-color: #e6f2f5; /* Soft blue-gray background */
+    }
+
+    .container-dashboard {
+        margin: 20px auto;
+        padding: 25px;
+        background-color: #ffffff; /* White background for the main content */
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 1200px;
+    }
+
+    h2 {
+        color: #03041c;
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        border-collapse: collapse;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1; /* Light hover effect */
+    }
+
+    .table-header {
+        background-color: #343a40; /* Dark header background */
+        color: white;
+    }
+
+    .table th, .table td {
+        padding: 15px;
+        text-align: left;
+        vertical-align: middle;
+        border-bottom: 1px solid #ddd;
+    }
+
+        .table td a {
+            color: #212529;
+            text-decoration: none;
+        }
+
+    .document-list {
+        padding-left: 0;
+        list-style-type: none;
+    }
+
+    .document-link {
+        color: #ff5722; /* Distinct orange color for document links */
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .document-link:hover {
+            color: #e64a19; /* Darker orange on hover */
+            text-decoration: underline;
+        }
+
+    .no-documents {
+        color: #6c757d;
+        font-style: italic;
+    }
+
+    .action-section {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .btn-submit {
+        background-color: #007bff;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-submit i {
+            margin-right: 8px;
+        }
+
+    /* .bg-success {
+        background-color: #28a745; /* Green */
+        color: white; /* Text color */
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .bg-danger {
+        background-color: #dc3545; /* Red */
+        color: white; /* Text color */
+        padding: 5px 10px;
+        border-radius: 5px;
+    } */
+</style>
+
+<div class="container-dashboard">
+    <h2>Manage Claims</h2>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    <table class="table table-striped table-hover">
+        <thead class="table-header">
+            <tr>
+                <th>Claim ID</th>
+                <th>Lecturer</th>
+                <th>Hours Worked</th>
+                <th>Hourly Rate (R)</th>
+                <th>Total Amount (R)</th>
+                <th>Date Submitted</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model)
+            {
+                <tr>
+                    <td>@claim.ClaimId</td>
+                    <td>@claim.LecturerName</td>
+                    <td>@claim.HoursWorked</td>
+                    <td>@claim.HourlyRate.ToString("C", southAfricaCulture)</td>
+                    <td>@claim.TotalAmount.ToString("C", southAfricaCulture)</td>
+                    <td>@claim.DateSubmitted.ToShortDateString()</td>
+                    <td>@claim.Status</td>
+                    <td>
+                      @*   <a asp-action="GenerateIndividualReport" asp-route-claimId="@claim.ClaimId" class="btn btn-info btn-sm">
+                            Download Report
+                        </a>
+                        @if (claim.Status == "Approved by HR" || claim.Status == "Rejected by HR")
+                        {
+                            <span class="badge @(claim.Status == "Approved by HR" ? "bg-success" : "bg-danger")">
+                                @claim.Status
+                            </span> <!-- Dynamically applies green or red styling -->
+                        }
+                        else
+                        {
+                            <form asp-action="ApproveRejectClaim" method="post" class="d-inline">
+                                <input type="hidden" name="claimId" value="@claim.ClaimId" />
+                                <button type="submit" name="isApproved" value="true" class="btn btn-success btn-sm">Approve</button>
+                                <button type="submit" name="isApproved" value="false" class="btn btn-danger btn-sm">Reject</button>
+                            </form>
+                        } *@
+                        <a asp-action="GenerateIndividualReport" asp-route-claimId="@claim.ClaimId" class="btn btn-info btn-sm">
+                            Download Report
+                        </a>
+                        @if (claim.Status == "Approved by HR" || claim.Status == "Rejected by HR")
+                        {
+                            <span class="badge bg-secondary">Finalized</span>
+                        }
+                        else
+                        {
+                            <form asp-action="ApproveRejectClaim" method="post" class="d-inline">
+                                <input type="hidden" name="claimId" value="@claim.ClaimId" />
+                                <button type="submit" name="isApproved" value="true" class="btn btn-success btn-sm">Approve</button>
+                                <button type="submit" name="isApproved" value="false" class="btn btn-danger btn-sm">Reject</button>
+                            </form>
+                        } 
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@* @{
+    ViewData["Title"] = "Manage Claims";
+    var southAfricaCulture = new System.Globalization.CultureInfo("en-ZA");
+}
+
 <h2>Manage Claims</h2>
 
 @if (TempData["SuccessMessage"] != null)
@@ -63,6 +255,6 @@
             </tr>
         }
     </tbody>
-</table>
+</table> *@
 @{
 }
